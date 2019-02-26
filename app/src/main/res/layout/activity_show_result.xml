@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/politicsState"
+                android:layout_width="@dimen/activity_horizontal_margin"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                tools:layout_editor_absoluteX="50dp"
+                tools:layout_editor_absoluteY="67dp" />
+
+            <TextView
+                android:id="@+id/politicsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Politik gegen Kinderarbeit" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/contolState"
+                android:layout_width="@dimen/activity_horizontal_margin"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                tools:layout_editor_absoluteX="50dp"
+                tools:layout_editor_absoluteY="187dp" />
+
+            <TextView
+                android:id="@+id/controlText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kontrolle der Arbeitsstätten" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/criticismState"
+                android:layout_width="@dimen/activity_horizontal_margin"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                tools:layout_editor_absoluteX="50dp"
+                tools:layout_editor_absoluteY="187dp" />
+
+            <TextView
+                android:id="@+id/criticismText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vorwürfe bezüglich Kinderarbeit" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/commitmentState"
+                android:layout_width="@dimen/activity_horizontal_margin"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                tools:layout_editor_absoluteX="50dp"
+                tools:layout_editor_absoluteY="187dp" />
+
+            <TextView
+                android:id="@+id/commitmentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Engagement gegen Kinderarbeit" />
+        </TableRow>
+    </TableLayout>
+
+</android.support.constraint.ConstraintLayout>

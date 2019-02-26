@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,7 +29,10 @@ public class MainActivity extends AppCompatActivity
 {
     private static final int RC_BARCODE_CAPTURE = 9001;
 
-//    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    public static final String EXTRA_RESULT_STATE_POLITICS = "com.example.myfirstapp.RESULT_STATE_POLITICS_EXTRA";
+    public static final String EXTRA_RESULT_STATE_CONTROL = "com.example.myfirstapp.RESULT_STATE_CONTROL_EXTRA";
+    public static final String EXTRA_RESULT_STATE_CRITICISM = "com.example.myfirstapp.RESULT_STATE_CRITICISM_EXTRA";
+    public static final String EXTRA_RESULT_STATE_COMMITMENT = "com.example.myfirstapp.RESULT_STATE_COMMITMENT_EXTRA";
 
     public static final String TAG = "Read";
 
@@ -47,14 +49,6 @@ public class MainActivity extends AppCompatActivity
         openRequests = 0;
     }
 
-/*    public void sendMessage( View view )
-    {
-        Intent intent = new Intent(this, DisplayMessageActivity.class );
-        EditText editText = findViewById( R.id.editText );
-        String message = editText.getText().toString();
-        intent.putExtra( EXTRA_MESSAGE, message );
-        startActivity( intent );
-    }*/
 
     public void scan( View view )
     {
@@ -71,26 +65,6 @@ public class MainActivity extends AppCompatActivity
     {
         TextView infoTextView = findViewById(R.id.infoTextView);
         infoTextView.setText("Scan barcode to get info");
-
-        Button politik = findViewById( R.id.button7 );
-        Button kontrolle = findViewById( R.id.button8 );
-        Button vorwuerfe = findViewById( R.id.button9 );
-        Button engagement = findViewById( R.id.button10 );
-
-        TextView politikText = findViewById( R.id.textView11 );
-        TextView kontrolleText = findViewById( R.id.textView12 );
-        TextView vorwuerfeText = findViewById( R.id.textView13 );
-        TextView engagementText = findViewById( R.id.textView14 );
-
-        politik.setVisibility(View.INVISIBLE);
-        kontrolle.setVisibility(View.INVISIBLE);
-        vorwuerfe.setVisibility(View.INVISIBLE);
-        engagement.setVisibility(View.INVISIBLE);
-
-        politikText.setVisibility(View.INVISIBLE);
-        kontrolleText.setVisibility(View.INVISIBLE);
-        vorwuerfeText.setVisibility(View.INVISIBLE);
-        engagementText.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -197,7 +171,6 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-
         return result;
     }
 
@@ -221,64 +194,58 @@ public class MainActivity extends AppCompatActivity
 
                         SortedMap<Integer, String> lights = getLights( response );
 
-                        Button politik = findViewById( R.id.button7 );
-                        Button kontrolle = findViewById( R.id.button8 );
-                        Button vorwuerfe = findViewById( R.id.button9 );
-                        Button engagement = findViewById( R.id.button10 );
-
-                        TextView politikText = findViewById( R.id.textView11 );
-                        TextView kontrolleText = findViewById( R.id.textView12 );
-                        TextView vorwuerfeText = findViewById( R.id.textView13 );
-                        TextView engagementText = findViewById( R.id.textView14 );
+                        Intent intent = new Intent( MainActivity.this, ShowResult.class );
 
                         switch(lights.get(lights.firstKey()))
                         {
-                            case "rot": politik.setBackgroundColor(Color.RED);
+                            case "rot": intent.putExtra(EXTRA_RESULT_STATE_POLITICS, Color.RED);
                                 break;
-                            case "gruen": politik.setBackgroundColor(Color.GREEN);
+                            case "gruen": intent.putExtra(EXTRA_RESULT_STATE_POLITICS, Color.GREEN);
                                 break;
-                            case "gelb": politik.setBackgroundColor(Color.YELLOW);
+                            case "gelb": intent.putExtra(EXTRA_RESULT_STATE_POLITICS, Color.YELLOW);
                                 break;
-                            case "weiß": politik.setBackgroundColor(Color.WHITE);
+                            case "weiß": intent.putExtra(EXTRA_RESULT_STATE_POLITICS, Color.WHITE);
                         }
 
                         lights = lights.tailMap(lights.firstKey()+1);
                         switch(lights.get(lights.firstKey()))
                         {
-                            case "rot": kontrolle.setBackgroundColor(Color.RED);
+                            case "rot": intent.putExtra(EXTRA_RESULT_STATE_CONTROL, Color.RED);
                                 break;
-                            case "gruen": kontrolle.setBackgroundColor(Color.GREEN);
+                            case "gruen": intent.putExtra(EXTRA_RESULT_STATE_CONTROL, Color.GREEN);
                                 break;
-                            case "gelb": kontrolle.setBackgroundColor(Color.YELLOW);
+                            case "gelb": intent.putExtra(EXTRA_RESULT_STATE_CONTROL, Color.YELLOW);
                                 break;
-                            case "weiß": kontrolle.setBackgroundColor(Color.WHITE);
+                            case "weiß": intent.putExtra(EXTRA_RESULT_STATE_CONTROL, Color.WHITE);
+                        }
+
+                        lights = lights.tailMap(lights.firstKey()+1);
+                        intent.putExtra(EXTRA_RESULT_STATE_CRITICISM, Color.RED);
+                        intent.putExtra(EXTRA_RESULT_STATE_COMMITMENT, Color.RED);
+                      /*  switch(lights.get(lights.firstKey()))
+                        {
+                            case "rot": intent.putExtra(EXTRA_RESULT_STATE_CRITICISM, Color.RED);
+                                break;
+                            case "gruen": intent.putExtra(EXTRA_RESULT_STATE_CRITICISM, Color.GREEN);
+                                break;
+                            case "gelb": intent.putExtra(EXTRA_RESULT_STATE_CRITICISM, Color.YELLOW);
+                                break;
+                            case "weiß": intent.putExtra(EXTRA_RESULT_STATE_CRITICISM, Color.WHITE);
                         }
 
                         lights = lights.tailMap(lights.firstKey()+1);
                         switch(lights.get(lights.firstKey()))
                         {
-                            case "rot": vorwuerfe.setBackgroundColor(Color.RED);
+                            case "rot": intent.putExtra(EXTRA_RESULT_STATE_COMMITMENT, Color.RED);
                                 break;
-                            case "gruen": vorwuerfe.setBackgroundColor(Color.GREEN);
+                            case "gruen": intent.putExtra(EXTRA_RESULT_STATE_COMMITMENT, Color.GREEN);
                                 break;
-                            case "gelb": vorwuerfe.setBackgroundColor(Color.YELLOW);
+                            case "gelb": intent.putExtra(EXTRA_RESULT_STATE_COMMITMENT, Color.YELLOW);
                                 break;
-                            case "weiß": vorwuerfe.setBackgroundColor(Color.WHITE);
-                        }
+                            case "weiß": intent.putExtra(EXTRA_RESULT_STATE_COMMITMENT, Color.WHITE);
+                        }*/
 
-                        lights = lights.tailMap(lights.firstKey()+1);
-                        switch(lights.get(lights.firstKey()))
-                        {
-                            case "rot": engagement.setBackgroundColor(Color.RED);
-                                break;
-                            case "gruen": engagement.setBackgroundColor(Color.GREEN);
-                                break;
-                            case "gelb": engagement.setBackgroundColor(Color.YELLOW);
-                                break;
-                            case "weiß": engagement.setBackgroundColor(Color.WHITE);
-                        }
-
-                        politik.setVisibility(View.VISIBLE);
+/*                        politik.setVisibility(View.VISIBLE);
                         politikText.setVisibility(View.VISIBLE);
 
                         vorwuerfe.setVisibility(View.VISIBLE);
@@ -288,7 +255,9 @@ public class MainActivity extends AppCompatActivity
                         kontrolleText.setVisibility(View.VISIBLE);
 
                         engagement.setVisibility(View.VISIBLE);
-                        engagementText.setVisibility(View.VISIBLE);
+                        engagementText.setVisibility(View.VISIBLE);*/
+
+                        startActivity( intent );
 
                         if(openRequests == 0)
                             progressBar.setVisibility( View.INVISIBLE );
@@ -313,30 +282,43 @@ public class MainActivity extends AppCompatActivity
 
     private SortedMap<Integer, String> getLights( String html )
     {
+        int safety = 0;
         SortedMap<Integer, String> realResult = new TreeMap<>();
         int i = -1;
         while( html.indexOf("/rot.gif", i+1) != -1)
         {
-            i = html.indexOf("rot.gif", i);
+            i = html.indexOf("/rot.gif", i);
             realResult.put(i, "rot");
+            safety++;
+            if(safety > 16)
+                break;
         }
         i = -1;
         while( html.indexOf("/gruen.gif", i+1) != -1)
         {
-            i = html.indexOf("gruen.gif", i);
+            i = html.indexOf("/gruen.gif", i);
             realResult.put(i, "gruen");
+            safety++;
+            if(safety > 16)
+                break;
         }
         i = -1;
         while( html.indexOf("/gelb.gif", i+1) != -1)
         {
-            i = html.indexOf("gelb.gif", i);
+            i = html.indexOf("/gelb.gif", i);
             realResult.put(i, "gelb");
+            safety++;
+            if(safety > 16)
+                break;
         }
         i = -1;
         while( html.indexOf("/.gif", i+1) != -1)
         {
             i = html.indexOf("/.gif", i);
             realResult.put(i, "weiß");
+            safety++;
+            if(safety > 16)
+                break;
         }
 
         return realResult;
