@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity
     public static final String EXTRA_RESULT_STATE_CRITICISM = "com.example.myfirstapp.RESULT_STATE_CRITICISM_EXTRA";
     public static final String EXTRA_RESULT_STATE_COMMITMENT = "com.example.myfirstapp.RESULT_STATE_COMMITMENT_EXTRA";
 
+    public static final String EXTRA_VENDOR = "com.example.myfirstapp.RESULT_STATE_COMMITMENT_EXTRA";
+
     public static final String TAG = "Read";
 
     private RequestQueue queue;
@@ -96,6 +98,7 @@ public class MainActivity extends AppCompatActivity
     private void getVendorInformation(String barcode)
     {
         String url ="http://opengtindb.org/?ean=" + barcode + "&cmd=query&queryid=400000000";
+        //String url ="http://opengtindb.org/?ean=4260357350296&cmd=query&queryid=400000000";
 
         setAnswerTextfield( "Lookup for vendor..." );
 
@@ -177,6 +180,8 @@ public class MainActivity extends AppCompatActivity
     private void getPossibleVendorInformation(final String vendor)
     {
         final String url ="https://www.aktiv-gegen-kinderarbeit.de/firma/" + vendor.replaceAll(" ", "-");
+        //final String url ="https://www.aktiv-gegen-kinderarbeit.de/firma/adidas";
+        //final String url = "https://www.aktiv-gegen-kinderarbeit.de/firma/albi-fruchtsafte/";
 
         Log.d("Create Request", url);
 
@@ -220,9 +225,7 @@ public class MainActivity extends AppCompatActivity
                         }
 
                         lights = lights.tailMap(lights.firstKey()+1);
-                        intent.putExtra(EXTRA_RESULT_STATE_CRITICISM, Color.RED);
-                        intent.putExtra(EXTRA_RESULT_STATE_COMMITMENT, Color.RED);
-                      /*  switch(lights.get(lights.firstKey()))
+                        switch(lights.get(lights.firstKey()))
                         {
                             case "rot": intent.putExtra(EXTRA_RESULT_STATE_CRITICISM, Color.RED);
                                 break;
@@ -243,19 +246,7 @@ public class MainActivity extends AppCompatActivity
                             case "gelb": intent.putExtra(EXTRA_RESULT_STATE_COMMITMENT, Color.YELLOW);
                                 break;
                             case "weiß": intent.putExtra(EXTRA_RESULT_STATE_COMMITMENT, Color.WHITE);
-                        }*/
-
-/*                        politik.setVisibility(View.VISIBLE);
-                        politikText.setVisibility(View.VISIBLE);
-
-                        vorwuerfe.setVisibility(View.VISIBLE);
-                        vorwuerfeText.setVisibility(View.VISIBLE);
-
-                        kontrolle.setVisibility(View.VISIBLE);
-                        kontrolleText.setVisibility(View.VISIBLE);
-
-                        engagement.setVisibility(View.VISIBLE);
-                        engagementText.setVisibility(View.VISIBLE);*/
+                        }
 
                         startActivity( intent );
 
@@ -287,7 +278,7 @@ public class MainActivity extends AppCompatActivity
         int i = -1;
         while( html.indexOf("/rot.gif", i+1) != -1)
         {
-            i = html.indexOf("/rot.gif", i);
+            i = html.indexOf("/rot.gif", i+1);
             realResult.put(i, "rot");
             safety++;
             if(safety > 16)
@@ -296,7 +287,7 @@ public class MainActivity extends AppCompatActivity
         i = -1;
         while( html.indexOf("/gruen.gif", i+1) != -1)
         {
-            i = html.indexOf("/gruen.gif", i);
+            i = html.indexOf("/gruen.gif", i+1);
             realResult.put(i, "gruen");
             safety++;
             if(safety > 16)
@@ -305,7 +296,7 @@ public class MainActivity extends AppCompatActivity
         i = -1;
         while( html.indexOf("/gelb.gif", i+1) != -1)
         {
-            i = html.indexOf("/gelb.gif", i);
+            i = html.indexOf("/gelb.gif", i+1);
             realResult.put(i, "gelb");
             safety++;
             if(safety > 16)
@@ -314,7 +305,7 @@ public class MainActivity extends AppCompatActivity
         i = -1;
         while( html.indexOf("/.gif", i+1) != -1)
         {
-            i = html.indexOf("/.gif", i);
+            i = html.indexOf("/.gif", i+1);
             realResult.put(i, "weiß");
             safety++;
             if(safety > 16)

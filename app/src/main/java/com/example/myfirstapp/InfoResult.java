@@ -1,6 +1,6 @@
 package com.example.myfirstapp;
 
-public class ShitClass {
+public class InfoResult {
 
     private final int politics;
 
@@ -10,7 +10,7 @@ public class ShitClass {
 
     private final int commitment;
 
-    public ShitClass(int politics, int control, int criticism, int commitment) {
+    public InfoResult(int politics, int control, int criticism, int commitment) {
         this.politics = politics;
         this.control = control;
         this.criticism = criticism;
