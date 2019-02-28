@@ -19,12 +19,12 @@ import static org.junit.Assert.assertTrue;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class MainActivityTest
+public class ShowResultTest
 {
     @Test
     public void testGetPossibleVendors() {
 
-        MainActivity testedInstance = new MainActivity();
+        ShowResult testedInstance = new ShowResult();
 
         List<String> result = testedInstance.getPossibleVendors("first");
         assertEquals(1, result.size());
